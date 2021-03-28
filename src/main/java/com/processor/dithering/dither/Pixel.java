@@ -22,10 +22,10 @@ public class Pixel {
 
     public Pixel(int pixel) {
         this.pixel = pixel;
-        a = (pixel >> 24) & 0xff;
-        r = (pixel >> 16) & 0xff;
-        g = (pixel >> 8) & 0xff;
-        b = pixel & 0xff;
+        a = (pixel >> 24) & Constants.WHITE;
+        r = (pixel >> 16) & Constants.WHITE;
+        g = (pixel >> 8) & Constants.WHITE;
+        b = pixel & Constants.WHITE;
     }
 
     public void adjust(QuantizationError err, int coeff) {

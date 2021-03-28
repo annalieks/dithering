@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Dither {
 
-    public static BufferedImage process(BufferedImage image) {
+    public static void process(BufferedImage image) {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
 
@@ -26,9 +26,9 @@ public class Dither {
                     pixel.adjust(err, 7);
                     image.setRGB(x + 1, y, pixel.getPixel());
 
-                    if (y + 1 < image.getHeight()) {
+                    if (y < image.getHeight() - 1) {
                         Pixel nearPixel = new Pixel(image.getRGB(x + 1, y + 1));
-                        pixel.adjust(err, 1);
+                        nearPixel.adjust(err, 1);
                         image.setRGB(x + 1, y + 1, nearPixel.getPixel());
                     }
                 }
@@ -38,15 +38,14 @@ public class Dither {
                     pixel.adjust(err, 5);
                     image.setRGB(x, y + 1, pixel.getPixel());
 
-                    if (x - 1 >= 0) {
+                    if (x >= 1) {
                         Pixel nearPixel = new Pixel(image.getRGB(x - 1, y + 1));
-                        pixel.adjust(err, 3);
+                        nearPixel.adjust(err, 3);
                         image.setRGB(x - 1, y + 1, nearPixel.getPixel());
                     }
                 }
             }
         }
-        return image;
     }
 
     private static Color getClosestColor(int color) {

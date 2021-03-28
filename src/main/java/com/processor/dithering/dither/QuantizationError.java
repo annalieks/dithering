@@ -8,16 +8,15 @@ import lombok.Setter;
  * Quantization error for rgba color model
  */
 @Getter
-@Setter
 public class QuantizationError {
 
-    private int errA;
+    private final int errA;
 
-    private int errR;
+    private final int errR;
 
-    private int errG;
+    private final int errG;
 
-    private int errB;
+    private final int errB;
 
     public QuantizationError(Pixel oldValue, Pixel newValue) {
         errA = oldValue.getA() - newValue.getA();

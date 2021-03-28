@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Path;
+
 @Configuration
 @EnableWebMvc
 public class ResourceConfig implements WebMvcConfigurer {
@@ -16,7 +18,7 @@ public class ResourceConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
-                .addResourceLocations("file:/" + mediaFolder);
+                .addResourceLocations(String.valueOf(Path.of(mediaFolder).toAbsolutePath().toUri()));
     }
 
 }

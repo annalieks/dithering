@@ -21,17 +21,17 @@ public class DitheringService {
     private String resourcesFolder;
 
     public void processImage(MultipartFile file) {
-        BufferedImage image, result;
+        BufferedImage image;
         try {
             image = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-            result = Dither.process(image);
+            Dither.process(image);
         } catch (IOException e) {
             throw new ProcessingException("Could not convert image into bytes");
         }
 
         String fileName = file.getOriginalFilename();
         try {
-            saveResult(result, fileName);
+            saveResult(image, fileName);
         } catch (IOException e) {
             throw new ProcessingException("Could not save the processed image");
         }
